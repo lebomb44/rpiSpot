@@ -31,7 +31,7 @@ Description=raspivid
 After=network.target
 
 [Service]
-ExecStart=/bin/sh -c "/usr/bin/raspivid -n -w 1280 -h 720 -b 1000000 -fps 15 -t 0 -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host=<remote_ip> port=9000"
+ExecStart=/bin/sh -c "/usr/bin/raspivid -n -w 1280 -h 720 -b 1000000 -fps 15 -t 0 -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host=<remote_ip> port=5600"
 
 [Install]
 WantedBy=default.target
