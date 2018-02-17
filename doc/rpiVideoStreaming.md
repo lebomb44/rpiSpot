@@ -1,5 +1,7 @@
 # Video Streaming from RPi
 
+Tutorial copied from: https://docs.emlid.com/navio/common/dev/video-streaming/
+
 First things first. You need to expand filesystem and enable camera using Raspberry Pi configuration tool. Type the following command in console:
 ```script
 pi@dronex: ~ $ sudo raspi-config
@@ -56,3 +58,7 @@ To disable autostart run this command:
 ```script
 sudo systemctl disable raspicam
 ```
+
+Other useful tutorail:
+https://dev.px4.io/en/qgc/video_streaming_wifi_broadcast.html
+
