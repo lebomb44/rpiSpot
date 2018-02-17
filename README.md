@@ -27,7 +27,7 @@ sudo systemctl stop hostapd
 ```
 
 ## Configuring a static IP
-We are configuring a standalone network to act as a server, so the Raspberry Pi needs to have a static IP address assigned to the wireless port. This documentation assumes that we are using the standard 192.168.x.x IP addresses for our wireless network, so we will assign the server the IP address 192.168.4.1. It is also assumed that the wireless device being used is *wlan0*.
+We are configuring a standalone network to act as a server, so the Raspberry Pi needs to have a static IP address assigned to the wireless port. This documentation assumes that we are using the standard 192.168.x.x IP addresses for our wireless network, so we will assign the server the IP address 192.168.4.1. It is also assumed that the wireless device being used is _wlan0_.
 
 To configure the static IP address, edit the dhcpcd configuration file with:
 ```script
