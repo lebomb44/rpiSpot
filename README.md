@@ -1,3 +1,7 @@
+# [SETTING UP A RASPBERRY PI AS AN ACCESS POINT IN A STANDALONE NETWORK](doc/rpiHotSpot.md)
+
+# [Video streaming from RPi](doc/rpiVideoStreaming.md)
+
 # SETTING UP A RASPBERRY PI AS AN ACCESS POINT IN A STANDALONE NETWORK
 
 Tutorial copied from:
