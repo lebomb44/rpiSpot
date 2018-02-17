@@ -27,7 +27,7 @@ sudo systemctl stop hostapd
 ```
 
 ## Configuring a static IP
-We are configuring a standalone network to act as a server, so the Raspberry Pi needs to have a static IP address assigned to the wireless port. This documentation assumes that we are using the standard 192.168.x.x IP addresses for our wireless network, so we will assign the server the IP address 192.168.4.1. It is also assumed that the wireless device being used is _wlan0_.
+We are configuring a standalone network to act as a server, so the Raspberry Pi needs to have a static IP address assigned to the wireless port. This documentation assumes that we are using the standard 192.168.x.x IP addresses for our wireless network, so we will assign the server the IP address 192.168.4.1. It is also assumed that the wireless device being used is **wlan0**.
 
 To configure the static IP address, edit the dhcpcd configuration file with:
 ```script
@@ -54,7 +54,7 @@ Type or copy the following information into the dnsmasq configuration file and s
 interface=wlan0      # Use the require wireless interface - usually wlan0
   dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
 ```
-So for *wlan0*, we are going to provide IP addresses between 192.168.4.2 and 192.168.4.20, with a lease time of 24 hours. If you are providing DHCP services for other network devices (e.g. eth0), you could add more sections with the appropriate interface header, with the range of addresses you intend to provide to that interface.
+So for **wlan0**, we are going to provide IP addresses between 192.168.4.2 and 192.168.4.20, with a lease time of 24 hours. If you are providing DHCP services for other network devices (e.g. eth0), you could add more sections with the appropriate interface header, with the range of addresses you intend to provide to that interface.
 
 There are many more options for dnsmasq; see the dnsmasq documentation for more details.
 
@@ -63,7 +63,7 @@ You need to edit the hostapd configuration file, located at /etc/hostapd/hostapd
 ```script
 sudo nano /etc/hostapd/hostapd.conf
 ```
-Add the information below to the configuration file. This configuration assumes we are using channel 7, with a network name of NameOfNetwork, and a password AardvarkBadgerHedgehog. Note that the name and password should *not* have quotes around them.
+Add the information below to the configuration file. This configuration assumes we are using channel 7, with a network name of NameOfNetwork, and a password AardvarkBadgerHedgehog. Note that the name and password should **not** have quotes around them.
 ```script
 interface=wlan0
 driver=nl80211
@@ -117,11 +117,11 @@ Reboot
 
 Using a wireless device, search for networks. The network SSID you specified in the hostapd configuration should now be present, and it should be accessible with the specified password.
 
-If SSH is enabled on the Raspberry Pi access point, it should be possible to connect to it from another Linux box (or a system with SSH connectivity present) as follows, assuming the *pi* account is present:
+If SSH is enabled on the Raspberry Pi access point, it should be possible to connect to it from another Linux box (or a system with SSH connectivity present) as follows, assuming the **pi** account is present:
 ```script
 ssh pi@192.168.4.1
 ```
-By this point, the Raspberry Pi is acting as an access point, and other devices can associate with it. Associated devices can access the Raspberry Pi access point via its IP address for operations such as *rsync*, *scp*, or *ssh*.
+By this point, the Raspberry Pi is acting as an access point, and other devices can associate with it. Associated devices can access the Raspberry Pi access point via its IP address for operations such as **rsync**, **scp**, or **ssh**.
 
 ## Using the Raspberry Pi as an access point to share an internet connection
 One common use of the Raspberry Pi as an access point is to provide wireless connections to a wired Ethernet connection, so that anyone logged into the access point can access the internet, providing of course that the wired Ethernet on the Pi can connect to the internet via some sort of router.
@@ -134,21 +134,21 @@ Since the configuration files are not ready yet, turn the new software off as fo
 ```script
 sudo systemctl stop hostapd
 ```
-Bridging creates a higher-level construct over the two ports being bridged. It is the bridge that is the network device, so we need to stop the *eth0* and *wlan0* ports being allocated IP addresses by the DHCP client on the Raspberry Pi.
+Bridging creates a higher-level construct over the two ports being bridged. It is the bridge that is the network device, so we need to stop the **eth0** and **wlan0** ports being allocated IP addresses by the DHCP client on the Raspberry Pi.
 ```script
 sudo nano /etc/dhcpcd.conf
 ```
-Add *denyinterfaces wlan0* and *denyinterfaces eth0* to the end of the file (but above any other added *interface* lines) and save the file.
+Add **denyinterfaces wlan0** and **denyinterfaces eth0** to the end of the file (but above any other added **interface** lines) and save the file.
 
-Add a new bridge, which in this case is called *br0*.
+Add a new bridge, which in this case is called **br0**.
 ```script
 sudo brctl addbr br0
 ```
-Connect the network ports. In this case, connect *eth0* to the bridge *br0*.
+Connect the network ports. In this case, connect **eth0** to the bridge **br0**.
 ```script
 sudo brctl addif br0 eth0
 ```
-Now the interfaces file needs to be edited to adjust the various devices to work with bridging. sudo nano */etc/network/interfaces* make the following edits.
+Now the interfaces file needs to be edited to adjust the various devices to work with bridging. sudo nano **/etc/network/interfaces** make the following edits.
 
 Add the bridging information at the end of the file.
 ```script
@@ -157,7 +157,7 @@ auto br0
 iface br0 inet manual
 bridge_ports eth0 wlan0
 ```
-The access point setup is almost the same as that shown in the previous section. Follow the instructions above to set up the *hostapd.conf* file, but add *bridge=br0* below the *interface=wlan0* line, and remove or comment out the driver line.
+The access point setup is almost the same as that shown in the previous section. Follow the instructions above to set up the **hostapd.conf** file, but add **bridge=br0** below the **interface=wlan0** line, and remove or comment out the driver line.
 ```script
 interface=wlan0
 bridge=br0
@@ -168,4 +168,4 @@ Now reboot the Raspberry Pi.
 
 There should now be a functioning bridge between the wireless LAN and the Ethernet connection on the Raspberry Pi, and any device associated with the Raspberry Pi access point will act as if it is connected to the access point's wired Ethernet.
 
-The *ifconfig* command will show the bridge, which will have been allocated an IP address via the wired Ethernet's DHCP server. The *wlan0* and *eth0* no longer have IP addresses, as they are now controlled by the bridge. It is possible to use a static IP address for the bridge if required, but generally, if the Raspberry Pi access point is connected to a ADSL router, the DHCP address will be fine.
+The **ifconfig** command will show the bridge, which will have been allocated an IP address via the wired Ethernet's DHCP server. The **wlan0** and **eth0** no longer have IP addresses, as they are now controlled by the bridge. It is possible to use a static IP address for the bridge if required, but generally, if the Raspberry Pi access point is connected to a ADSL router, the DHCP address will be fine.
