@@ -59,6 +59,6 @@ To disable autostart run this command:
 sudo systemctl disable raspicam
 ```
 
-Other useful tutorail:
+Other useful tutorial:
 https://dev.px4.io/en/qgc/video_streaming_wifi_broadcast.html
 
