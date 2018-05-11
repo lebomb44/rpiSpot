@@ -67,7 +67,7 @@ Add the information below to the configuration file. This configuration assumes 
 ```script
 interface=wlan0
 driver=nl80211
-ssid=NameOfNetwork
+ssid=dronex
 hw_mode=g
 channel=7
 wmm_enabled=0
@@ -75,7 +75,7 @@ macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
-wpa_passphrase=AardvarkBadgerHedgehog
+wpa_passphrase=pi4dronex
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
